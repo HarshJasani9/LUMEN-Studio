@@ -106,7 +106,7 @@ export default function Timeline() {
                   color: 'var(--color-muted)'
                 }}
               >
-                {event.description}
+                {event.event}
               </p>
             </div>
           ))}
@@ -164,7 +164,7 @@ export default function Timeline() {
                   lineHeight: '1.6'
                 }}
               >
-                {event.description}
+                {event.event}
               </p>
             </div>
           </div>

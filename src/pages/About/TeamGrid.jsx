@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import FadeUp from '@/components/animation/FadeUp';
-import { team } from '@/data/team';
+import { members } from '@/data/team';
 
 export default function TeamGrid() {
   return (
@@ -17,7 +17,7 @@ export default function TeamGrid() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          {team.map((member, index) => (
+          {members.map((member, index) => (
             <FadeUp key={member.id} delay={index * 0.1}>
               <motion.div
                 className="w-full flex flex-col gap-6 group"
