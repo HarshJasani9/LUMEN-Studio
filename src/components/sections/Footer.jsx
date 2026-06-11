@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Linkedin, Github, Globe, Mail } from 'lucide-react';
+import { Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -72,24 +72,9 @@ export default function Footer() {
           </a>
           
           <div className="flex gap-4">
-            <a href="#" aria-label="Twitter" className="transition-colors duration-200"
-               style={{ color: 'var(--color-parchment)' }}
-               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-citrus)')}
-               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-parchment)')}>
-              <Twitter size={20} />
-            </a>
-            <a href="#" aria-label="Website" className="transition-colors duration-200"
-               style={{ color: 'var(--color-parchment)' }}
-               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-citrus)')}
-               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-parchment)')}>
-              <Globe size={20} />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="transition-colors duration-200"
-               style={{ color: 'var(--color-parchment)' }}
-               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-citrus)')}
-               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-parchment)')}>
-              <Linkedin size={20} />
-            </a>
+            <a href="https://twitter.com" style={{ color: 'var(--color-muted)' }}>Twitter</a>
+            <a href="https://linkedin.com" style={{ color: 'var(--color-muted)' }}>LinkedIn</a>
+            <a href="https://github.com" style={{ color: 'var(--color-muted)' }}>GitHub</a>
           </div>
         </div>
       </div>
