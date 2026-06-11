@@ -39,9 +39,11 @@ export default function ServicesSection() {
 
     const track = trackRef.current;
     
+    track.style.willChange = 'transform';
     gsap.to(track, {
       x: () => -(track.scrollWidth - window.innerWidth),
       ease: 'none',
+      onComplete: () => { track.style.willChange = 'auto'; },
       scrollTrigger: {
         trigger: containerRef.current,
         pin: true,

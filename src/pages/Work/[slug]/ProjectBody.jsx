@@ -107,6 +107,8 @@ export default function ProjectBody({ project }) {
       {/* Block 3: Full Bleed Imagery */}
       <FadeUp delay={0.5}>
         <div 
+          role="img"
+          aria-label={`${project.title} project visual`}
           className="w-full flex items-center justify-center rounded-sm overflow-hidden"
           style={{
             aspectRatio: '16/9',

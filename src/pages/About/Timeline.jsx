@@ -41,9 +41,11 @@ export default function Timeline() {
     if (!track) return;
     
     // Horizontal scroll
+    track.style.willChange = 'transform';
     const horizontalTween = gsap.to(track, {
       x: () => -(track.scrollWidth - window.innerWidth),
       ease: 'none',
+      onComplete: () => { track.style.willChange = 'auto'; },
       scrollTrigger: {
         trigger: containerRef.current,
         pin: true,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/navigation/Navbar';
@@ -8,6 +8,12 @@ import CursorProvider from '@/components/cursor/CursorProvider';
 
 export default function RootLayout() {
   const location = useLocation();
+
+  useEffect(() => {
+    return () => {
+      if (window.__lenis) window.__lenis.destroy();
+    };
+  }, []);
 
   return (
     <CursorProvider>
