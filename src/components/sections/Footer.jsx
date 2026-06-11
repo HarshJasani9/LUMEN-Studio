@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Twitter, Linkedin, Github, Globe, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -78,11 +78,11 @@ export default function Footer() {
                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-parchment)')}>
               <Twitter size={20} />
             </a>
-            <a href="#" aria-label="Instagram" className="transition-colors duration-200"
+            <a href="#" aria-label="Website" className="transition-colors duration-200"
                style={{ color: 'var(--color-parchment)' }}
                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-citrus)')}
                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-parchment)')}>
-              <Instagram size={20} />
+              <Globe size={20} />
             </a>
             <a href="#" aria-label="LinkedIn" className="transition-colors duration-200"
                style={{ color: 'var(--color-parchment)' }}
