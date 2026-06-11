@@ -1,1 +1,6 @@
-// TODO: src/utils/cn.js — Utility for conditional Tailwind class merging using clsx and tailwind-merge.
+import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export default function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
