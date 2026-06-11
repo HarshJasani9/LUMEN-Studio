@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import gsap from '@/utils/gsapConfig';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import useGSAP from '@/hooks/useGSAP';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Button from '@/components/ui/Button';
@@ -14,11 +15,18 @@ export default function CtaBanner({ heading, subtext, buttonLabel, buttonHref })
     if (!sectionRef.current) return;
 
     if (reduceMotion) {
-      gsap.core.globals('ScrollTrigger').create({
+      // No tween — just use ScrollTrigger to toggle state instantly
+      ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top 50%',
-        onEnter: () => setIsCitrus(true),
-        onLeaveBack: () => setIsCitrus(false)
+        onEnter: () => {
+          sectionRef.current.style.backgroundColor = 'var(--color-citrus)';
+          setIsCitrus(true);
+        },
+        onLeaveBack: () => {
+          sectionRef.current.style.backgroundColor = 'var(--color-surface)';
+          setIsCitrus(false);
+        },
       });
       return;
     }
@@ -32,18 +40,16 @@ export default function CtaBanner({ heading, subtext, buttonLabel, buttonHref })
         scrub: true,
         onUpdate: (self) => {
           setIsCitrus(self.progress > 0.5);
-        }
-      }
+        },
+      },
     });
-  }, []);
+  }, [reduceMotion]);
 
   return (
     <section
       ref={sectionRef}
       className="w-full py-32 px-6 md:px-12 flex flex-col items-center text-center"
-      style={{
-        backgroundColor: 'var(--color-surface)',
-      }}
+      style={{ backgroundColor: 'var(--color-surface)' }}
     >
       <h2
         className="uppercase mb-6 transition-colors duration-300"
@@ -66,13 +72,13 @@ export default function CtaBanner({ heading, subtext, buttonLabel, buttonHref })
       >
         {subtext}
       </p>
-      
-      <Button 
-        href={buttonHref} 
+
+      <Button
+        href={buttonHref}
         variant="primary"
         magnetic
         className={cn(
-          "transition-colors duration-300", 
+          "transition-colors duration-300",
           isCitrus && "!bg-[var(--color-void)] !text-[var(--color-citrus)] hover:!bg-[var(--color-border)]"
         )}
       >

@@ -32,7 +32,7 @@ export default function TeamGrid() {
                 >
                   <motion.div
                     className="absolute inset-0 p-8 flex items-center justify-center text-center"
-                    style={{ backgroundColor: 'rgba(10, 10, 15, 0.85)' }}
+                    style={{ backgroundColor: 'color-mix(in srgb, var(--color-void) 88%, transparent)' }}
                     variants={{
                       rest: { opacity: 0, y: 8 },
                       hover: { opacity: 1, y: 0 }

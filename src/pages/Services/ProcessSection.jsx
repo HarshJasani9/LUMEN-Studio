@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import EyebrowLabel from '@/components/ui/EyebrowLabel';
 
 const phases = [
@@ -17,9 +18,10 @@ export default function ProcessSection() {
   const trackRef = useRef(null);
   const progressRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  const reduceMotion = useReducedMotion();
 
   useGSAP(() => {
-    if (isMobile || !containerRef.current || !trackRef.current) return;
+    if (isMobile || reduceMotion || !containerRef.current || !trackRef.current) return;
 
     const track = trackRef.current;
     

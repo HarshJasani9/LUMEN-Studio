@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useUIStore } from '@/store/uiStore';
 import useMagnet from '@/hooks/useMagnet';
 import cn from '@/utils/cn';
@@ -8,6 +9,7 @@ export default function Button({
   magnetic = false, 
   href, 
   onClick, 
+  type = 'button',
   children, 
   className 
 }) {
@@ -46,20 +48,30 @@ export default function Button({
 
   const baseClasses = "inline-flex items-center justify-center px-6 py-3 transition-colors duration-300 rounded-none cursor-pointer focus:outline-none";
 
-  const Element = href ? 'a' : 'button';
-  const elementProps = href ? { href } : { onClick, type: 'button' };
+  // Use Link for internal routes, <a> for external, <button> otherwise
+  const isInternal = href && href.startsWith('/');
+  const isExternal = href && !href.startsWith('/');
+
+  const sharedProps = {
+    ref: magnetRef,
+    className: cn(baseClasses, variantClasses[variant], className),
+    style: baseStyles,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+    onMouseMove: handleMouseMove,
+  };
+
+  if (isInternal) {
+    return <Link to={href} {...sharedProps}>{children}</Link>;
+  }
+
+  if (isExternal) {
+    return <a href={href} target="_blank" rel="noopener noreferrer" {...sharedProps}>{children}</a>;
+  }
 
   return (
-    <Element
-      ref={magnetRef}
-      className={cn(baseClasses, variantClasses[variant], className)}
-      style={baseStyles}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      {...elementProps}
-    >
+    <button type={type} onClick={onClick} {...sharedProps}>
       {children}
-    </Element>
+    </button>
   );
 }

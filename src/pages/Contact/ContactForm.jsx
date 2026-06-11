@@ -7,9 +7,9 @@ export default function ContactForm() {
     name: '',
     email: '',
     projectType: '',
-    message: ''
+    message: '',
   });
-  const [status, setStatus] = useState('default'); // 'default', 'sending', 'sent'
+  const [status, setStatus] = useState('default'); // 'default' | 'sending' | 'sent'
   const reduceMotion = useReducedMotion();
 
   const handleChange = (e) => {
@@ -27,31 +27,31 @@ export default function ContactForm() {
       return;
     }
 
-    setTimeout(() => {
-      setStatus('sent');
-    }, 1500);
+    setTimeout(() => setStatus('sent'), 1500);
   };
+
+  const fieldClass =
+    'peer w-full bg-transparent border-b border-[var(--color-border)] py-4 outline-none focus:border-[var(--color-parchment)] transition-colors placeholder-transparent text-[var(--color-parchment)]';
+  const labelClass =
+    'absolute left-0 -top-0 text-xs transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-base peer-focus:-top-0 peer-focus:text-xs text-[var(--color-muted)] pointer-events-none uppercase tracking-widest';
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-2">
+
       {/* Name */}
       <div className="relative pt-6 mb-4">
         <input
           required
           type="text"
           name="name"
-          id="name"
-          className="peer w-full bg-transparent border-b border-[var(--color-border)] py-4 outline-none focus:border-[var(--color-parchment)] transition-colors placeholder-transparent text-[var(--color-parchment)]"
+          id="contact-name"
+          className={fieldClass}
           placeholder="Name"
           value={formData.name}
           onChange={handleChange}
           style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)' }}
         />
-        <label
-          htmlFor="name"
-          className="absolute left-0 -top-0 text-xs transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-base peer-focus:-top-0 peer-focus:text-xs text-[var(--color-muted)] pointer-events-none uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-mono)' }}
-        >
+        <label htmlFor="contact-name" className={labelClass} style={{ fontFamily: 'var(--font-mono)' }}>
           Name
         </label>
       </div>
@@ -62,18 +62,14 @@ export default function ContactForm() {
           required
           type="email"
           name="email"
-          id="email"
-          className="peer w-full bg-transparent border-b border-[var(--color-border)] py-4 outline-none focus:border-[var(--color-parchment)] transition-colors placeholder-transparent text-[var(--color-parchment)]"
+          id="contact-email"
+          className={fieldClass}
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
           style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)' }}
         />
-        <label
-          htmlFor="email"
-          className="absolute left-0 -top-0 text-xs transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-base peer-focus:-top-0 peer-focus:text-xs text-[var(--color-muted)] pointer-events-none uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-mono)' }}
-        >
+        <label htmlFor="contact-email" className={labelClass} style={{ fontFamily: 'var(--font-mono)' }}>
           Email
         </label>
       </div>
@@ -83,7 +79,7 @@ export default function ContactForm() {
         <select
           required
           name="projectType"
-          id="projectType"
+          id="contact-project-type"
           className="peer w-full bg-transparent border-b border-[var(--color-border)] py-4 outline-none focus:border-[var(--color-parchment)] transition-colors text-[var(--color-parchment)] appearance-none rounded-none"
           value={formData.projectType}
           onChange={handleChange}
@@ -98,7 +94,7 @@ export default function ContactForm() {
           <option value="Something Else" className="bg-[var(--color-surface)]">Something Else</option>
         </select>
         <label
-          htmlFor="projectType"
+          htmlFor="contact-project-type"
           className="absolute left-0 -top-0 text-xs transition-all peer-invalid:top-10 peer-invalid:text-base peer-focus:-top-0 peer-focus:text-xs text-[var(--color-muted)] pointer-events-none uppercase tracking-widest"
           style={{ fontFamily: 'var(--font-mono)' }}
         >
@@ -111,40 +107,30 @@ export default function ContactForm() {
         <textarea
           required
           name="message"
-          id="message"
+          id="contact-message"
           rows={4}
-          className="peer w-full bg-transparent border-b border-[var(--color-border)] py-4 outline-none focus:border-[var(--color-parchment)] transition-colors placeholder-transparent text-[var(--color-parchment)] resize-none"
+          className={`${fieldClass} resize-none`}
           placeholder="Message"
           value={formData.message}
           onChange={handleChange}
           style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-base)' }}
         />
-        <label
-          htmlFor="message"
-          className="absolute left-0 -top-0 text-xs transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-base peer-focus:-top-0 peer-focus:text-xs text-[var(--color-muted)] pointer-events-none uppercase tracking-widest"
-          style={{ fontFamily: 'var(--font-mono)' }}
-        >
+        <label htmlFor="contact-message" className={labelClass} style={{ fontFamily: 'var(--font-mono)' }}>
           Message
         </label>
       </div>
 
+      {/* Submit — Button renders as <button type="submit"> */}
       <div className="w-max">
-        {/* Simulating button click submission if Button doesn't spread type="submit" natively */}
-        <button type="submit" className="hidden" id="hidden-submit-btn"></button>
-        <Button 
-          variant="primary" 
-          magnetic={status === 'default'} 
+        <Button
+          type="submit"
+          variant="primary"
+          magnetic={status === 'default'}
           className={status === 'sent' ? 'opacity-50 pointer-events-none' : ''}
-          onClick={(e) => {
-             // Let the hidden button handle the actual form submission execution if custom button intercepts
-             if (status === 'default') {
-               document.getElementById('hidden-submit-btn')?.click();
-             }
-          }}
         >
-          {status === 'default' && "SEND MESSAGE"}
-          {status === 'sending' && "SENDING..."}
-          {status === 'sent' && "SENT ✓"}
+          {status === 'default' && 'SEND MESSAGE'}
+          {status === 'sending' && 'SENDING...'}
+          {status === 'sent' && 'SENT ✓'}
         </Button>
       </div>
     </form>

@@ -46,10 +46,15 @@ export default function NavMenu() {
   useEffect(() => {
     if (navOpen) {
       lenis?.stop();
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') closeNav();
+      };
+      window.addEventListener('keydown', handleEscape);
+      return () => window.removeEventListener('keydown', handleEscape);
     } else {
       lenis?.start();
     }
-  }, [navOpen, lenis]);
+  }, [navOpen, lenis, closeNav]);
 
   return (
     <AnimatePresence>
