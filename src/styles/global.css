@@ -1,1 +1,25 @@
-/* TODO: src/styles/global.css — Global styling and Tailwind directives. */
+@import './tokens.css';
+@import './reset.css';
+@import './typography.css';
+@import '@fontsource/inter';
+@import '@fontsource/bebas-neue';
+@import '@fontsource/dm-mono';
+
+html {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+::selection {
+  background: var(--color-citrus);
+  color: var(--color-void);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

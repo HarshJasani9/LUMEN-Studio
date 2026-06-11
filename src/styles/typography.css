@@ -1,1 +1,20 @@
-/* TODO: src/styles/typography.css — Global typography styles and font imports. */
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: 400;
+}
+
+.mono,
+code {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-mono);
+}

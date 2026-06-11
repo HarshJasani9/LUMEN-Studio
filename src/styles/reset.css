@@ -1,1 +1,37 @@
-/* TODO: src/styles/reset.css — CSS reset and base styles. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Base input resets */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}

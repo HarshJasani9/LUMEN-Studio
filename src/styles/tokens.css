@@ -1,1 +1,49 @@
-/* TODO: src/styles/tokens.css — CSS variables defining design tokens for the app. */
+:root {
+  /* Colors */
+  --color-void: #0A0A0F;
+  --color-surface: #13131F;
+  --color-border: #2A2A3D;
+  --color-parchment: #F0EDE6;
+  --color-muted: #6B6B80;
+  --color-citrus: #C8F04D;
+  --color-citrus-dim: #8AAD2A;
+
+  /* Functional aliases */
+  --bg: var(--color-void);
+  --text-primary: var(--color-parchment);
+  --text-secondary: var(--color-muted);
+  --accent: var(--color-citrus);
+  --surface: var(--color-surface);
+  --border: var(--color-border);
+
+  /* Fonts */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Type scale */
+  --text-xs: clamp(0.65rem, 1vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 1.2vw, 0.875rem);
+  --text-base: clamp(0.95rem, 1.4vw, 1rem);
+  --text-lg: clamp(1.1rem, 1.8vw, 1.25rem);
+  --text-xl: clamp(1.4rem, 2.5vw, 1.75rem);
+  --text-2xl: clamp(2rem, 4vw, 3rem);
+  --text-hero: clamp(4rem, 10vw, 9rem);
+
+  /* Letter spacing */
+  --tracking-display: 0.04em;
+  --tracking-mono: 0.08em;
+
+  /* Spacing */
+  --space-section: clamp(6rem, 12vw, 10rem);
+  --space-inner: clamp(2rem, 5vw, 4rem);
+
+  /* Motion eases */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* Durations */
+  --duration-fast: 250ms;
+  --duration-base: 500ms;
+  --duration-slow: 900ms;
+}
