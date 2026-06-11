@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import { useUIStore } from '@/store/uiStore';
 import Tag from '@/components/ui/Tag';
 import FadeUp from '@/components/animation/FadeUp';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import cn from '@/utils/cn';
 
 const WorkCard = forwardRef(({ project, index, className }, ref) => {
   const { setCursor } = useUIStore();
+  const reduceMotion = useReducedMotion();
 
   return (
     <div ref={ref} className={cn("w-full h-full", className)}>
@@ -19,8 +21,8 @@ const WorkCard = forwardRef(({ project, index, className }, ref) => {
             aspectRatio: '4/3',
             backgroundColor: project.color,
           }}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: reduceMotion ? 1 : 1.03 }}
+          transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <Link
             to={`/work/${project.slug}`}

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import { studio } from '@/data/team';
 
 export default function Timeline() {
@@ -9,6 +10,7 @@ export default function Timeline() {
   const trackRef = useRef(null);
   const dotsRef = useRef([]);
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  const reduceMotion = useReducedMotion();
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -16,6 +18,10 @@ export default function Timeline() {
     if (isMobile) {
       dotsRef.current.forEach((dot) => {
         if (!dot) return;
+        if (reduceMotion) {
+          gsap.set(dot, { opacity: 1, scale: 1 });
+          return;
+        }
         gsap.fromTo(dot,
           { opacity: 0, scale: 0 },
           {
@@ -50,6 +56,10 @@ export default function Timeline() {
     // Individual dot triggers within containerAnimation
     dotsRef.current.forEach((dot) => {
       if (!dot) return;
+      if (reduceMotion) {
+        gsap.set(dot, { opacity: 1, scale: 1 });
+        return;
+      }
       gsap.fromTo(dot, 
         { opacity: 0, scale: 0 },
         { 

@@ -4,6 +4,7 @@ import { useUIStore } from '@/store/uiStore';
 import NavLink from './NavLink';
 import useLenis from '@/hooks/useLenis';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useReducedMotion from '@/hooks/useReducedMotion';
 
 const menuVariants = {
   initial: { clipPath: 'inset(0 0 100% 0)' },
@@ -40,6 +41,7 @@ export default function NavMenu() {
   const { navOpen, closeNav } = useUIStore();
   const lenis = useLenis();
   const isMobile = useMediaQuery('(max-width: 640px)');
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (navOpen) {
@@ -55,14 +57,22 @@ export default function NavMenu() {
         <motion.nav
           className="fixed inset-0 z-[200] flex flex-col justify-center items-center"
           style={{ backgroundColor: 'var(--color-void)' }}
-          variants={menuVariants}
+          variants={reduceMotion ? {
+            initial: { opacity: 0 },
+            enter: { opacity: 1, transition: { duration: 0 } },
+            exit: { opacity: 0, transition: { duration: 0 } }
+          } : menuVariants}
           initial="initial"
           animate="enter"
           exit="exit"
         >
           <div className="flex flex-col items-center gap-6">
             {links.map((link) => (
-              <motion.div key={link.name} variants={linkVariants}>
+              <motion.div key={link.name} variants={reduceMotion ? {
+                initial: { opacity: 0 },
+                enter: { opacity: 1, transition: { duration: 0 } },
+                exit: { opacity: 0, transition: { duration: 0 } }
+              } : linkVariants}>
                 <NavLink 
                   to={link.path} 
                   onClick={closeNav}

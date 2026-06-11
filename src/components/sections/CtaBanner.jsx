@@ -1,15 +1,27 @@
 import React, { useRef, useState } from 'react';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import Button from '@/components/ui/Button';
 import cn from '@/utils/cn';
 
 export default function CtaBanner({ heading, subtext, buttonLabel, buttonHref }) {
   const sectionRef = useRef(null);
+  const reduceMotion = useReducedMotion();
   const [isCitrus, setIsCitrus] = useState(false);
 
   useGSAP(() => {
     if (!sectionRef.current) return;
+
+    if (reduceMotion) {
+      gsap.core.globals('ScrollTrigger').create({
+        trigger: sectionRef.current,
+        start: 'top 50%',
+        onEnter: () => setIsCitrus(true),
+        onLeaveBack: () => setIsCitrus(false)
+      });
+      return;
+    }
 
     gsap.to(sectionRef.current, {
       backgroundColor: 'var(--color-citrus)',

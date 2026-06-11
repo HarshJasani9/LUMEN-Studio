@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import cn from '@/utils/cn';
 
 export default function Divider({ className }) {
   const lineRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
   useGSAP(() => {
+    if (reduceMotion) return;
     gsap.fromTo(lineRef.current,
       { width: '0%' },
       {

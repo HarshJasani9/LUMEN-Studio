@@ -6,6 +6,7 @@ import { projects } from '@/data/projects';
 import EyebrowLabel from '@/components/ui/EyebrowLabel';
 import Tag from '@/components/ui/Tag';
 import FadeUp from '@/components/animation/FadeUp';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import cn from '@/utils/cn';
 
 const getGridClasses = (index) => {
@@ -21,6 +22,7 @@ const getGridClasses = (index) => {
 
 export default function FeaturedWork() {
   const { setCursor } = useUIStore();
+  const reduceMotion = useReducedMotion();
   const featuredProjects = projects.slice(0, 5);
 
   return (
@@ -102,10 +104,10 @@ export default function FeaturedWork() {
                       backgroundColor: 'color-mix(in srgb, var(--color-citrus) 90%, transparent)'
                     }}
                     variants={{
-                      initial: { y: '100%' },
-                      hover: { y: '0%' }
+                      initial: { y: reduceMotion ? '0%' : '100%', opacity: 0 },
+                      hover: { y: '0%', opacity: 1 }
                     }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <span
                       className="uppercase"

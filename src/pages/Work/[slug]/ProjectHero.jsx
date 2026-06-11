@@ -2,12 +2,14 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
+import useReducedMotion from '@/hooks/useReducedMotion';
 
 export default function ProjectHero({ project }) {
   const containerRef = useRef(null);
+  const reduceMotion = useReducedMotion();
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || reduceMotion) return;
     
     gsap.fromTo(
       containerRef.current, 

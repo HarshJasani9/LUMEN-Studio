@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import gsap from '@/utils/gsapConfig';
 import useGSAP from '@/hooks/useGSAP';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import EyebrowLabel from '@/components/ui/EyebrowLabel';
 
 const services = [
@@ -31,6 +32,7 @@ export default function ServicesSection() {
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  const reduceMotion = useReducedMotion();
 
   useGSAP(() => {
     if (isMobile || !containerRef.current || !trackRef.current) return;
