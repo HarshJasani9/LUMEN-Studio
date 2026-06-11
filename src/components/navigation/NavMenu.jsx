@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useUIStore } from '@/store/uiStore';
 import NavLink from './NavLink';
 import useLenis from '@/hooks/useLenis';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 const menuVariants = {
   initial: { clipPath: 'inset(0 0 100% 0)' },
@@ -38,6 +39,7 @@ const links = [
 export default function NavMenu() {
   const { navOpen, closeNav } = useUIStore();
   const lenis = useLenis();
+  const isMobile = useMediaQuery('(max-width: 640px)');
 
   useEffect(() => {
     if (navOpen) {
@@ -66,7 +68,7 @@ export default function NavMenu() {
                   onClick={closeNav}
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'var(--text-hero)',
+                    fontSize: isMobile ? 'var(--text-2xl)' : 'var(--text-hero)',
                   }}
                 >
                   {link.name}
